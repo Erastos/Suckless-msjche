@@ -16,7 +16,7 @@ static const int topbar                 = 1;        /* 0 means bottom bar */
 static const int horizpadbar            = 5;        /* horizontal padding for statusbar */
 static const int vertpadbar             = 7;        /* vertical padding for statusbar */
 static const int iscentered             = 1;        /* all windows spawn centered if floating */
-static const char *fonts[]              = {"Dejavu Sans Mono for Powerline:size=9",
+static const char *fonts[]              = {"Hack Nerd Font:size=9",
                                         "JoyPixels:size=10:antialias=true:autohint=true",
                                         "FontAwesome:size=10:antialias=true:autohint=true",
                                         };
@@ -110,9 +110,9 @@ static Key keys[] = {
     /* modifier             key        function        argument */
     { MODKEY|ControlMask,   XK_Delete,     spawn,          SHCMD("sysact") },
     { Mod1Mask|ControlMask, XK_l,          spawn,          SHCMD("lock") },
-    { MODKEY|ShiftMask,     XK_Return,     spawn,          {.v = dmenucmd } },
+    { MODKEY,     XK_e,     spawn,          {.v = dmenucmd } },
     { MODKEY,               XK_Return,     spawn,          {.v = termcmd } },
-    { Mod1Mask,             XK_Return,     spawn,          {.v = tabtermcmd } },
+    //{ Mod1Mask,             XK_Return,     spawn,          {.v = tabtermcmd } },
     { MODKEY|ShiftMask,     XK_s,          togglescratch,  {.v = scratchpadcmd } },
     { MODKEY|ShiftMask,     XK_t,          togglebar,      {0} },
     { MODKEY|ShiftMask,     XK_j,          rotatestack,    {.i = +1 } },
@@ -152,9 +152,9 @@ static Key keys[] = {
     { 0, XF86XK_AudioMute,           spawn,        SHCMD("amixer set Master toggle") },
     { 0, XF86XK_AudioRaiseVolume,    spawn,        SHCMD("amixer set Master 5%+") },
     { 0, XF86XK_AudioLowerVolume,    spawn,        SHCMD("amixer set Master 5%-") },
-    { 0, XF86XK_AudioPrev,           spawn,        SHCMD("mpc prev") },
-    { 0, XF86XK_AudioNext,           spawn,        SHCMD("mpc next") },
-    { 0, XF86XK_AudioPlay,           spawn,        SHCMD("mpc pause") },
+    { 0, XF86XK_AudioPrev,           spawn,        SHCMD("playerctl previous; mpc prev") },
+    { 0, XF86XK_AudioNext,           spawn,        SHCMD("playerctl next; mpc next") },
+    { 0, XF86XK_AudioPlay,           spawn,        SHCMD("playerctl play-pause; mpc toggle") },
 
     /* Screencast commands */
     { Mod1Mask,                 XK_Delete,       spawn,        SHCMD("dmenurecord") },
@@ -170,20 +170,21 @@ static Key keys[] = {
 
     /* Apps Launched with Alt + KEY */
     { Mod1Mask,                 XK_grave,   spawn,      SHCMD("dmenuunicode") },
-    { Mod1Mask,                 XK_l,       spawn,      SHCMD("dmenu-lpass-nu") },
+    { Mod1Mask|ShiftMask,       XK_l,       spawn,      SHCMD("dmenu-lpass-nu") },
     { Mod1Mask,                 XK_c,       spawn,      SHCMD("/usr/bin/mmenu") },
     { Mod1Mask,                 XK_w,       spawn,      CMD("networkmanager_dmenu") },
-    { Mod1Mask,                 XK_b,       spawn,      CMD("qutebrowser") },
-    { Mod1Mask|ShiftMask,       XK_b,       spawn,      CMD("firefox") },
+    { Mod1Mask|ShiftMask,       XK_b,       spawn,      CMD("qutebrowser") },
+    { Mod1Mask,                 XK_b,       spawn,      CMD("firefox") },
     { Mod1Mask,                 XK_e,       spawn,      CMD("thunar") },
     { Mod1Mask,                 XK_n,       spawn,      CMD("st -e vim ~/Dropbox/Lehigh/Notes/") },
     { Mod1Mask|ShiftMask,       XK_c,       spawn,      CMD("~/.dmenu/dmenu-edit-configs.sh") },
     { Mod1Mask,                 XK_p,       spawn,      CMD("cpcolor") },
     { Mod1Mask|ShiftMask,       XK_p,       spawn,      CMD("pavucontrol") },
     { Mod1Mask,                 XK_t,       spawn,      CMD("cawbird") },
-    { Mod1Mask,                 XK_x,       spawn,      CMD("pkill mpv") },
+    //{ Mod1Mask,                 XK_x,       spawn,      CMD("pkill mpv") },
     { Mod1Mask,                 XK_m,       spawn,      CMD("gromit-mpx") },
     { Mod1Mask,                 XK_d,       spawn,      CMD("doppler") },
+    { Mod1Mask,                 XK_s,       spawn,      CMD("spotify") },
 
     /* Apps Launched with SUPER + ALT + KEY */
 
@@ -196,7 +197,7 @@ static Key keys[] = {
     TAGKEYS(                  XK_7,          6)
     TAGKEYS(                  XK_8,          7)
     TAGKEYS(                  XK_9,          8)
-    { MODKEY|ShiftMask,       XK_q,          quit,      {0} },
+    { MODKEY|ShiftMask|ControlMask,       XK_q,          quit,      {0} },
     { MODKEY|ShiftMask,       XK_r,          quit,      {1} },
 };
 
